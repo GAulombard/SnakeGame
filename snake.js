@@ -1,16 +1,19 @@
 const cvs = document.getElementById("snake");
 const ctx = cvs.getContext("2d");
 
+
+//create background
 const ground = new Image();
 ground.src = "./img/ground.png";
 
+//Create food
 const foodImg = new Image();
 foodImg.src = "./img/food.png";
 
-// create unit
+// create unit (1box = 32px)
 const box = 32;
 
-// create snake
+// create snake (array)
 let snake = [];
 
 snake[0] = {
@@ -27,10 +30,10 @@ let food = {
 // create the score
 let score = 0;
 
-//controle snake
+//control snake,
 let d;
 
-document.addEventListener("keydown", (event) => {
+document.addEventListener("keydown", (event) => { 
     let key = event.keyCode;
     if(key == 37 && d != "RIGHT") {
         d = "LEFT";
@@ -47,7 +50,7 @@ document.addEventListener("keydown", (event) => {
 
 });
 
-// On dessine tout dans le canvas
+// drawing eveything in the canvas
 function draw() {
     
     ctx.drawImage(ground,0,0);
@@ -65,5 +68,5 @@ function draw() {
 
 }
 
-// call drw function every 100 ms
+// call draw function every 100 ms
 let game = setInterval(draw,100);
