@@ -53,7 +53,7 @@ document.addEventListener("keydown", (event) => {
 
 });
 
-// drawing eveything in the canvas
+// function for drawing eveything in the canvas
 function draw() {
     
     ctx.drawImage(ground,0,0);
@@ -74,6 +74,42 @@ function draw() {
     ctx.fillStyle="white";
     ctx.font =" 45px Changa one";
     ctx.fillText(" : "+score, 2*box, 1.6*box);
+
+    // snake movement
+    // old head snake
+    let snakeX = snake[0].x;
+    let snakeY = snake[0].y;
+
+    //which direction ?
+    if(d=="LEFT") snakeX -= box;
+    if(d=="UP") snakeY -= box;
+    if(d=="RIGHT") snakeX += box;
+    if(d=="DOWN") snakeY += box;
+    
+    //new head
+    let newHead = {
+        x : snakeX,
+        y : snakeY
+    }
+   
+    snake.unshift(newHead);
+
+
+    //collision with food
+    if(snake[0].x == food.x && snake[0].y == food.y) {
+        score++;
+        food = {
+            x: Math.floor(Math.random()*16+1)  * box, // between 32 and 17*32
+            y: Math.floor(Math.random()*14+3)  * box // between 32*3 and 17*32
+        }; 
+    }
+    else { //we remove the tail
+        snake.pop();
+    }
+
+ 
+
+    
 
 }
 
