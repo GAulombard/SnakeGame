@@ -27,9 +27,9 @@ dead.src = "./audio/dead.mp3"
 const eat = new Audio();
 eat.src = "./audio/eat.mp3"
 const move1 = new Audio();
-move1.src = "./audio/up.mp3"
+move1.src = "./audio/move1.mp3"
 const move2 = new Audio();
-move2.src = "./audio/left.mp3"
+move2.src = "./audio/move2.mp3"
 
 //create the food random position
 let food = {
