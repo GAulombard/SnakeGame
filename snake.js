@@ -23,9 +23,12 @@ snake[0] = {
 
 //create the food random position
 let food = {
-    x: Math.floor(Math.random()*17+1)  * box,
-    y: Math.floor(Math.random()*17+1)  * box
+    x: Math.floor(Math.random()*16+1)  * box, // between 32 and 17*32
+    y: Math.floor(Math.random()*14+3)  * box // between 32*3 and 17*32
 };
+console.log("-- Coordonnées de food --");
+console.log("x = "+food.x/32);
+console.log("y = "+food.y/32);
 
 // create the score
 let score = 0;
@@ -64,7 +67,13 @@ function draw() {
         ctx.strokeRect(snake[i].x,snake[i].y,box,box);
     }
 
+    // food
     ctx.drawImage(foodImg,food.x,food.y);
+
+    // score
+    ctx.fillStyle="white";
+    ctx.font =" 45px Changa one";
+    ctx.fillText(" : "+score, 2*box, 1.6*box);
 
 }
 
