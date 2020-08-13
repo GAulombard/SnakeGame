@@ -77,6 +77,26 @@ function collision(head, array) {
     return false;
 }
 
+// create button when game is over
+function addButton() {
+    let btn = document.createElement('input');
+    let div = document.getElementById("btn");
+    btn.type="button";
+    btn.class="reboot-btn";
+    btn.value="click to REBOOT or press Enter";
+    div.appendChild(btn);
+
+    btn.addEventListener("click", () => {
+        document.location.reload(true);
+    });
+    document.addEventListener("keydown", (event) => {
+        let key = event.keyCode
+        if( key == 13) {document.location.reload(true);}
+    });
+}
+
+
+
 
 // function for drawing eveything in the canvas
 function draw() {
@@ -139,6 +159,7 @@ function draw() {
         dead.play();
         clearInterval(game);
         ctx.fillText('GAME OVER', 8 * box, 1.6 * box, 500);
+        addButton();
     }
 }
 
