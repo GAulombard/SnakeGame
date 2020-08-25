@@ -36,9 +36,6 @@ let food = {
     x: Math.floor(Math.random() * 16 + 1) * box, // between 32 and 17*32
     y: Math.floor(Math.random() * 14 + 3) * box // between 32*3 and 17*32
 };
-// console.log("-- Coordonnées de food --");
-// console.log("x = " + food.x / 32);
-// console.log("y = " + food.y / 32);
 
 // create the score
 let score = 0;
@@ -83,7 +80,7 @@ function addButton() {
     let div = document.getElementById("btn");
     btn.type="button";
     btn.class="reboot-btn";
-    btn.value="click to REBOOT or press Enter";
+    btn.value="press Enter or click to REBOOT";
     div.appendChild(btn);
 
     btn.addEventListener("click", () => {
@@ -95,7 +92,15 @@ function addButton() {
     });
 }
 
-
+// function to check if food appears on the snake
+function checkFoodIsOnSnake(food,snake) {
+    for(let i = 0 ; i < snake.length ; i++) {
+        if (snake[i].x == food.x || snake[i].y == food.y){
+            return true;
+        }
+    }
+    return false;
+}
 
 
 // function for drawing eveything in the canvas
@@ -137,10 +142,12 @@ function draw() {
     if (snake[0].x == food.x && snake[0].y == food.y) {
         eat.play();
         score++;
-        food = {
-            x: Math.floor(Math.random() * 16 + 1) * box, // between 32 and 17*32
-            y: Math.floor(Math.random() * 14 + 3) * box // between 32*3 and 17*32
-        };
+        while(checkFoodIsOnSnake(food,snake)) {
+            food = {
+                x: Math.floor(Math.random() * 16 + 1) * box, // between 32 and 17*32
+                y: Math.floor(Math.random() * 14 + 3) * box // between 32*3 and 17*32
+            };
+        }
     }
     else { //we remove the tail
         snake.pop();
@@ -163,6 +170,6 @@ function draw() {
     }
 }
 
-
 // call draw function every 100 ms
 let game = setInterval(draw, 100);
+
